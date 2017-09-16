@@ -40,8 +40,13 @@ p {
   flex: 1 1 auto;
   position: relative;/* need this to position inner content */
   overflow-y: auto;
+  width: 100%;
 }
 
+.pagina-contenido > iframe {
+  width: 100%;
+  height: calc(100vh - 60px);
+}
 /*.pagina-footer {
 flex: 0 0 auto;
 background-color: #d15b30;
