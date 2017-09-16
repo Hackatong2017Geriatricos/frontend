@@ -2,8 +2,14 @@
 	box-sizing: border-box;
 }
 
+html {
+	height: 100%;
+}
+
 body {
 	margin: 0;
+	font-family: 'Open Sans', sans-serif;
+	height: 100%;
 }
 
 h1, h2, h3 {
@@ -19,6 +25,7 @@ input {
 .buscadorDeGeriatricos {
 	width: 100%;
 	min-height: 500px;
+	height: 100%;
 }
 
 .filtros {
@@ -28,16 +35,39 @@ input {
 	float: left;
 }
 
+.info {
+	display: flex;
+	bottom: 0;
+	position: absolute;
+	margin-bottom: 10px;
+}
+
 .info .logo {
+	display: inline-block;
 	width: 100px;
 	height: 100px;
-	background-image: url(./../img/semanatic.png);
+	margin: 0 10px ;
+}
+
+.info .logo.tic {
+	background-image: url(../img/semanatic.png);
 	background-size: cover;
-	margin: 0 auto;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.info .logo.fundeps {
+	background-image: url(../img/logo_fundeps.png);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
 }
 
 .mapa {
 	width: 75%;
+	height: 100%;
 	min-height: inherit;
 	float: left;
 }
