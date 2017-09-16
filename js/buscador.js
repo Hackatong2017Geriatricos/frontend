@@ -35,17 +35,17 @@ var todosLosMarkers = [];
 function mostrarInformacion(geriatrico) {
 	$('.geriatrico').style = '';
 	$('.geriatrico .nombre').innerHTML = geriatrico.nombre;
-	$('.geriatrico .descripcion').innerHTML = geriatrico.descripcion;
 	$('.geriatrico .estado').innerHTML = geriatrico.estado_habilitacion;
-	$('.geriatrico .telefono').innerHTML = geriatrico.telefono;
 	$('.geriatrico .email').innerHTML = geriatrico.email;
 	$('.geriatrico .direccion').innerHTML = geriatrico.direccion;
+	$('.geriatrico .telefono').innerHTML = geriatrico.telefono;
+	$('.geriatrico .url').innerHTML = geriatrico.url;
+	$('.geriatrico .descripcion').innerHTML = geriatrico.descripcion;
 	$('.geriatrico .titular').innerHTML = geriatrico.titular;
 	$('.geriatrico .cuit').innerHTML = geriatrico.cuit;
 	$('.geriatrico .fechaInscripcion').innerHTML = geriatrico.fecha_inscripcion;
 	$('.geriatrico .enteHabilitador').innerHTML = geriatrico.ente_habilitador;
 	$('.geriatrico .plazasHabilitadas').innerHTML = geriatrico.plazas_habilitadas;
-	$('.geriatrico .web').innerHTML = geriatrico.url;
 }
 
 /**
