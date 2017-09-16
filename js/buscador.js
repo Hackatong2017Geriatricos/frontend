@@ -125,7 +125,7 @@ function iniciarMapa() {
 	map = new google.maps.Map($('.mapa'), { center: cordoba, zoom: 12 });
 
 	fetch(
-		'https://hackatong2017-geriatricos.herokuapp.com/locales.json',
+		'http://hackatong2017-geriatricos.herokuapp.com/locales.json',
 		{
 			method: 'GET',
 			headers: {
