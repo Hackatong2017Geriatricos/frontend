@@ -11,14 +11,20 @@
 	<div class="buscadorDeGeriatricos">
 		<div class="filtros">
 			<h2>Buscador</h2>
-				
-				<input class="buscarPorNombre" type="text" placeholder="Nombre del geriátrico">
-				
-				<hr>
-				
-				<div class="info">
-					<div class="logo tic"></div>
-					<div class="logo fundeps"></div>
+			
+			<input class="buscarPorNombre" type="text" placeholder="Nombre del geriátrico">
+			
+			<div class="geriatrico" style="display: none;">
+				<div class="grupo-dato">
+					<div>Nombre: <span class="nombre"></span></div>
+					<div>Estado: <span class="estado"></span></div>
+					<div>Email: <span class="email"></span></div>
+					<div>Direccion: <span class="direccion"></span></div>
+				</div>
+				<div class="grupo-dato">
+					<div>Titular: <span class="titular"></span></div>
+					<div>CUIT: <span class="cuit"></span></div>
+					<div>Fecha Inscripción: <span class="fechaInscripcion"></span></div>
 				</div>
 				
 				<div class="geriatrico" style="display: none;">
@@ -47,8 +53,13 @@
 					</div>
 				</div>
 			</div>
-			
-			<div class="mapa"></div>
+		
+			<div class="info">
+				<div class="logo tic"></div>
+			</div>
 		</div>
-	</body>
-	</html>
+		
+		<div class="mapa"></div>
+	</div>
+</body>
+</html>
