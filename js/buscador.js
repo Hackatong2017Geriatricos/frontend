@@ -109,6 +109,8 @@ function filtrar() {
 				mostrarIconoEnMapa(geriatrico);
 			}
 		});
+	} else {
+		geriatricos.forEach(mostrarIconoEnMapa);
 	}
 }
 
