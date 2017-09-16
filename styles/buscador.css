@@ -31,13 +31,25 @@ input {
 
 .buscarPorNombre {
 	margin: 10px 0px;
+	border: none;
+	height: 36px;
+	/*font-size: 1em;*/
+	/*font-style: italic;*/
+	padding: 5px;
+}
+
+.buscarPorNombre:focus {
+	outline: none;
+	border: 2px solid deepskyblue;
 }
 
 .filtros {
 	padding: 10px;
 	width: 25%;
-	/*min-height: inherit;*/
+	height: 100%;
 	float: left;
+	display: flex;
+	flex-direction: column;
 }
 
 .geriatrico {
@@ -49,30 +61,20 @@ input {
 }
 
 .info {
-	display: flex;
+	display: inline-block;
 	bottom: 0;
-	position: absolute;
-	margin-bottom: 10px;
+	margin: 10px auto;
 }
 
 .info .logo {
 	display: inline-block;
-	width: 100px;
-	height: 100px;
-	margin: 0 10px ;
+	width: 80px;
+	height: 80px;
+	margin: 30px auto;
 }
 
 .info .logo.tic {
 	background-image: url(../img/semanatic.png);
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: contain;
-}
-
-.info .logo.fundeps {
-	background-image: url(../img/logo_fundeps.png);
-	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
@@ -85,7 +87,7 @@ input {
 	float: left;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 500px) {
 	.filtros {
 		width: 100%;
 		height: auto;
@@ -94,3 +96,4 @@ input {
 		width: 100%;
 	}
 }
+

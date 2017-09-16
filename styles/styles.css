@@ -28,6 +28,7 @@ p {
 
 .encabezado-titulo{
   margin: 0px 20px;
+  text-align: center;
 }
 
 .navbar > li {
