@@ -1,11 +1,12 @@
 var $ = document.querySelector.bind(document);
 var map = null;
 var geriatricos = [
-	{ nombre: 'Bla bla', coor: { lat: -31.4164778, lng: -64.1919612 }, direccion: 'Indep.' },
-	{ nombre: 'Otro mas', coor: { lat: -31.41, lng: -64.19 }, direccion: 'Estrada' }
+	{ nombre: 'Padre Lamonaca', coor: { lat: -31.4164778, lng: -64.1919612 }, direccion: 'Independencia 880 2B, Nueva Cordoba, Cordoba, Argentina' },
+	{ nombre: 'Geriatrico San Isidro', coor: { lat: -31.41, lng: -64.19 }, direccion: 'Estrada' }
 ];
 var templateMapa = '<div id="icono">Nombre: {nombre}<br />Direccion: {direccion}</div>';
 var infoWindowVisible = null;
+var todosLosMarkers = [];
 
 /**
  * @desc Esta funcion va a ser llamada cada vez que se haga click en un punto en el mapa (Marker).
@@ -14,13 +15,61 @@ var infoWindowVisible = null;
  * @param  {Object} geriatrico - El objeto que contiene toda la informacion del geriatrico
  */
 function mostrarInformacion(geriatrico) {
-	if ($('.info')) {
-		$('.info').remove();
-	}
-
 	$('.geriatrico').style = '';
 	$('.geriatrico .nombre').innerHTML = geriatrico.nombre;
 	$('.geriatrico .direccion').innerHTML = geriatrico.direccion;
+}
+
+/**
+ * @desc Esta funcion va a ser llamada cada vez que se quiera agregar un icono en el mapa
+ * @param  {Object} geriatrico - El objeto que contiene toda la informacion del geriatrico
+ */
+function mostrarIconoEnMapa(geriatrico) {
+	var marker = new google.maps.Marker({
+		position: geriatrico.coor,
+		map: map,
+		title: geriatrico.nombre
+	});
+
+	var templateFinal = templateMapa
+		.replace('{nombre}', geriatrico.nombre)
+		.replace('{direccion}', geriatrico.direccion);
+
+	var infowindow = new google.maps.InfoWindow({
+		content: templateFinal
+	});
+
+	marker.addListener('click', function() {
+		if (infoWindowVisible) {
+			infoWindowVisible.close();
+		}
+
+		infowindow.open(map, marker);
+		infoWindowVisible = infowindow;
+
+		mostrarInformacion(geriatrico);
+	});
+
+	todosLosMarkers.push(marker);
+}
+
+/**
+ * @desc Esta funcion va a ser ejecutada cada vez que se escriba una letra en el buscador
+ */
+function filtrar() {
+	var nombre = $('.buscarPorNombre').value.trim();
+
+	if (nombre.length > 0) {
+		todosLosMarkers.forEach(function(marker) {
+			marker.setMap(null);
+		});
+
+		geriatricos.forEach(function(geriatrico) {
+			if (geriatrico.nombre.indexOf(nombre) !== -1) {
+				mostrarIconoEnMapa(geriatrico);
+			}
+		});
+	}
 }
 
 /**
@@ -34,34 +83,9 @@ function iniciarMapa() {
 
 	map = new google.maps.Map($('.mapa'), { center: cordoba, zoom: 12 });
 
-	geriatricos.forEach(function(geriatrico) {
-		var marker = new google.maps.Marker({
-			position: geriatrico.coor,
-			map: map,
-			title: geriatrico.nombre
-		});
-
-		var templateFinal = templateMapa
-			.replace('{nombre}', geriatrico.nombre)
-			.replace('{direccion}', geriatrico.direccion);
-
-		var infowindow = new google.maps.InfoWindow({
-			content: templateFinal
-		});
-
-		marker.addListener('click', function() {
-			if (infoWindowVisible) {
-				infoWindowVisible.close();
-			}
-
-			infowindow.open(map, marker);
-			infoWindowVisible = infowindow;
-
-			mostrarInformacion(geriatrico);
-		});
-	});
+	geriatricos.forEach(mostrarIconoEnMapa);
 }
 
 window.onload = function() {
-	//
+	$('.buscarPorNombre').onkeyup = filtrar;
 };
