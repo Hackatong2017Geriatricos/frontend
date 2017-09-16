@@ -102,8 +102,29 @@ function iniciarMapa() {
 	// Creamos el mapa
 	map = new google.maps.Map($('.mapa'), { center: cordoba, zoom: 12 });
 
-	// Mostramos todos los geristricos por defecto
-	geriatricos.forEach(mostrarIconoEnMapa);
+	fetch(
+		'https://hackatong2017-geriatricos.herokuapp.com/locales.json',
+		{
+			method: 'GET',
+			headers: {
+				'Accept': 'application/json, text/plain, */*',
+				'Content-Type': 'application/json'
+			}
+		}
+	)
+	.then(function(r) { return r.json(); })
+	.then(function(data) {
+		// Si hay datos, mostrarlos
+		if (Array.isArray(data) && data.length > 0) {
+			geriatricos = data;
+
+			// Mostramos todos los geristricos por defecto
+			geriatricos.forEach(mostrarIconoEnMapa);
+		}
+	})
+	.catch(function() {
+		// Si hay un error en el endpoint... Hacer algo aca.
+	});
 }
 
 window.onload = function() {
