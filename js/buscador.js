@@ -17,7 +17,13 @@ var todosLosMarkers = [];
 function mostrarInformacion(geriatrico) {
 	$('.geriatrico').style = '';
 	$('.geriatrico .nombre').innerHTML = geriatrico.nombre;
+	$('.geriatrico .estado').innerHTML = geriatrico.estado;
+	$('.geriatrico .email').innerHTML = geriatrico.email;
 	$('.geriatrico .direccion').innerHTML = geriatrico.direccion;
+	$('.geriatrico .titular').innerHTML = geriatrico.titular;
+	$('.geriatrico .cuit').innerHTML = geriatrico.cuit;
+	$('.geriatrico .fechaInscripcion').innerHTML = geriatrico.fecha_inscripcion;
+	$('.geriatrico .plazasHabilitadas').innerHTML = geriatrico.plazas_habilitadas;
 }
 
 /**
