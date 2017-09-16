@@ -1,9 +1,6 @@
 var $ = document.querySelector.bind(document);
 var map = null;
-var geriatricos = [
-	{ nombre: 'Padre Lamonaca', coor: { lat: -31.4164778, lng: -64.1919612 }, direccion: 'Independencia 880 2B, Nueva Cordoba, Cordoba, Argentina' },
-	{ nombre: 'Geriatrico San Isidro', coor: { lat: -31.41, lng: -64.19 }, direccion: 'Estrada' }
-];
+var geriatricos = [];
 var templateMapa = '<div id="icono">Nombre: {nombre}<br />Direccion: {direccion}</div>';
 var infoWindowVisible = null;
 var todosLosMarkers = [];
