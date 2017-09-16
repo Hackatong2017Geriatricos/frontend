@@ -5,37 +5,42 @@
 	<link rel="stylesheet" href="./styles/buscador.css">
 	<script src="./js/buscador.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyY3Bef2aYcowoTbS_NO5uWpvoHxuJk7k&callback=iniciarMapa"
-    async defer></script>
+	async defer></script>
 </head>
 <body>
 	<div class="buscadorDeGeriatricos">
 		<div class="filtros">
-			<h1>Buscador</h2>
-
-			<hr>
-
-			<input class="buscarPorNombre" type="text" placeholder="Nombre del geriatrico">
-
-			<hr>
-
-			<div class="info">
-				<div class="logo tic"></div>
-				<div class="logo fundeps"></div>
+			<h2>Buscador</h2>
+				
+				<input class="buscarPorNombre" type="text" placeholder="Nombre del geriátrico">
+				
+				<hr>
+				
+				<div class="info">
+					<div class="logo tic"></div>
+					<div class="logo fundeps"></div>
+				</div>
+				
+				<div class="geriatrico" style="display: none;">
+					<div class="grupo-dato">
+						<div>Nombre: <span class="nombre"></span></div>
+						<div>Estado: <span class="estado"></span></div>
+						<div>Email: <span class="email"></span></div>
+						<div>Direccion: <span class="direccion"></span></div>
+					</div>
+					<div class="grupo-dato">
+						<div>Titular: <span class="titular"></span></div>
+						<div>CUIT: <span class="cuit"></span></div>
+						<div>Fecha Inscripción: <span class="fechaInscripcion"></span></div>
+					</div>
+					<div class="grupo-dato">
+						<div>Plazas Habilitadas: <span class="plazasHabilitadas"></span></div>
+					</div>
+					
+				</div>
 			</div>
-
-			<div class="geriatrico" style="display: none;">
-				<div>Nombre: <span class="nombre"></span></div>
-				<div>Estado: <span class="estado"></span></div>
-				<div>Email: <span class="email"></span></div>
-				<div>Direccion: <span class="direccion"></span></div>
-				<div>Titular: <span class="titular"></span></div>
-				<div>CUIT: <span class="cuit"></span></div>
-				<div>Fecha Inscripción: <span class="fechaInscripcion"></span></div>
-				<div>Plazas Habilitadas: <span class="plazasHabilitadas"></span></div>
-			</div>
+			
+			<div class="mapa"></div>
 		</div>
-
-		<div class="mapa"></div>
-	</div>
-</body>
-</html>
+	</body>
+	</html>

@@ -29,11 +29,23 @@ input {
 	height: 100%;
 }
 
+.buscarPorNombre {
+	margin: 10px 0px;
+}
+
 .filtros {
 	padding: 10px;
 	width: 25%;
 	/*min-height: inherit;*/
 	float: left;
+}
+
+.geriatrico {
+	margin: 20px 0px;
+}
+
+.geriatrico .grupo-dato {
+	margin: 10px 0px;
 }
 
 .info {
@@ -76,7 +88,7 @@ input {
 @media (max-width: 480px) {
 	.filtros {
 		width: 100%;
-		height: 250px;
+		height: auto;
 	}
 	.mapa {
 		width: 100%;
