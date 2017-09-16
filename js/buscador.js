@@ -1,5 +1,26 @@
 var $ = document.querySelector.bind(document);
 var map = null;
+/**
+ * @desc Array donde se van a guardar los geriatricos traidos desde la DB.
+ * @example
+	{
+	    "nombre": "",
+	    "descripcion": "",
+	    "url": "",
+	    "titular": "",
+	    "cuit": "",
+	    "telefono": "",
+	    "direccion": "",
+	    "email": "",
+	    "longitud": null,
+	    "latitud": null,
+	    "fecha_inscripcion": null,
+	    "estado_habilitacion": "",
+	    "ente_habilitador": "",
+	    "plazas_habilitadas": null
+	}
+ * @type {Array}
+ */
 var geriatricos = [];
 var templateMapa = '<div id="icono">Nombre: {nombre}<br />Direccion: {direccion}</div>';
 var infoWindowVisible = null;
@@ -14,13 +35,17 @@ var todosLosMarkers = [];
 function mostrarInformacion(geriatrico) {
 	$('.geriatrico').style = '';
 	$('.geriatrico .nombre').innerHTML = geriatrico.nombre;
-	$('.geriatrico .estado').innerHTML = geriatrico.estado;
+	$('.geriatrico .descripcion').innerHTML = geriatrico.descripcion;
+	$('.geriatrico .estado').innerHTML = geriatrico.estado_habilitacion;
+	$('.geriatrico .telefono').innerHTML = geriatrico.telefono;
 	$('.geriatrico .email').innerHTML = geriatrico.email;
 	$('.geriatrico .direccion').innerHTML = geriatrico.direccion;
 	$('.geriatrico .titular').innerHTML = geriatrico.titular;
 	$('.geriatrico .cuit').innerHTML = geriatrico.cuit;
 	$('.geriatrico .fechaInscripcion').innerHTML = geriatrico.fecha_inscripcion;
+	$('.geriatrico .enteHabilitador').innerHTML = geriatrico.ente_habilitador;
 	$('.geriatrico .plazasHabilitadas').innerHTML = geriatrico.plazas_habilitadas;
+	$('.geriatrico .web').innerHTML = geriatrico.url;
 }
 
 /**
@@ -30,7 +55,7 @@ function mostrarInformacion(geriatrico) {
 function mostrarIconoEnMapa(geriatrico) {
 	// Creamos el icono a mostrar en el mapa
 	var marker = new google.maps.Marker({
-		position: geriatrico.coor,
+		position: { lat: geriatrico.latitud, lng: geriatrico.longitud },
 		map: map,
 		title: geriatrico.nombre
 	});
