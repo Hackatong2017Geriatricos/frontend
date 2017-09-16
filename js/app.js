@@ -15,6 +15,8 @@ function cambiarURL(pagina) {
 
 	// Cambiamos el contenido de la pagina
 	$('iframe').src = './' + pagina + '.html';
+
+	$('title').innerHTML = pagina.charAt(0).toUpperCase() + pagina.slice(1);
 }
 
 window.onload = function() {
