@@ -41,7 +41,7 @@ p {
   font-weight: bold;
 }
 
-.navbar.activo {
+.navbar li.activo {
   background-color: #dd701f;
   font-weight:bolder;
 }
