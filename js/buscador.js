@@ -25,31 +25,40 @@ function mostrarInformacion(geriatrico) {
  * @param  {Object} geriatrico - El objeto que contiene toda la informacion del geriatrico
  */
 function mostrarIconoEnMapa(geriatrico) {
+	// Creamos el icono a mostrar en el mapa
 	var marker = new google.maps.Marker({
 		position: geriatrico.coor,
 		map: map,
 		title: geriatrico.nombre
 	});
 
+	// Creamos el template a mostrar cuando se haga click en el icono previamente creado
 	var templateFinal = templateMapa
 		.replace('{nombre}', geriatrico.nombre)
 		.replace('{direccion}', geriatrico.direccion);
 
+	// El objeto `InfoWindow` es el tooltip que se muestra cuando se hace click en un icono del mapa
 	var infowindow = new google.maps.InfoWindow({
 		content: templateFinal
 	});
 
+	// Al hacer click en el Marker, abrimos el InfoWindow
 	marker.addListener('click', function() {
+		// Si hay algun infoWindow siendo visible, cerrarlo, porque ahora hay que mostrar otro.
 		if (infoWindowVisible) {
 			infoWindowVisible.close();
 		}
 
 		infowindow.open(map, marker);
+
+		// Guardamos el infoWindows siendo mostrado para luego ocultarlo facilmente cuando se abra otro
 		infoWindowVisible = infowindow;
 
+		// Mostramos informacion detallada del geriatrico en el menu izquierdo
 		mostrarInformacion(geriatrico);
 	});
 
+	// Guardamos el maker (icono) para tener la refrencia para luego poder eliminarlo (al filtrar)
 	todosLosMarkers.push(marker);
 }
 
@@ -59,11 +68,14 @@ function mostrarIconoEnMapa(geriatrico) {
 function filtrar() {
 	var nombre = $('.buscarPorNombre').value.trim();
 
+	// Si el usuario ingresó un texto, filtrar
 	if (nombre.length > 0) {
+		// Ocultamos todos los iconos del mapa para mostrarlos solo los filtrados
 		todosLosMarkers.forEach(function(marker) {
 			marker.setMap(null);
 		});
 
+		// Recorremos todos los geriatricos, y mostramos solo los que coincidan con la busqueda
 		geriatricos.forEach(function(geriatrico) {
 			if (geriatrico.nombre.indexOf(nombre) !== -1) {
 				mostrarIconoEnMapa(geriatrico);
@@ -81,11 +93,14 @@ function iniciarMapa() {
 		lng: -64.1919612
 	};
 
+	// Creamos el mapa
 	map = new google.maps.Map($('.mapa'), { center: cordoba, zoom: 12 });
 
+	// Mostramos todos los geristricos por defecto
 	geriatricos.forEach(mostrarIconoEnMapa);
 }
 
 window.onload = function() {
+	// Cuando se filtre por nombre de geriatrico, filtrarlos en el mapa.
 	$('.buscarPorNombre').onkeyup = filtrar;
 };
