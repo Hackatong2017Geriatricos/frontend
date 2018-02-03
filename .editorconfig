@@ -1,10 +1,10 @@
-# Unix-style newlines with a newline ending every file
+# Terminar todos los archivos con un salto de linea estilo Unix
 [*]
 end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-# 2 space indentation
+# Indentacion con 2 espacios
 [*.{js,jsx,scss,json}]
 indent_style = space
 indent_size = 2
