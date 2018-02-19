@@ -1,0 +1,18 @@
+.Cabecera {
+  background-color: #FD7E2B;
+  height: 65px;
+
+  nav {
+    a {
+      border-radius: 3px 3px 0 0;
+      padding: 0 10px;
+      line-height: 30px;
+      background-color: transparent;
+
+      &.activo,
+      &:hover {
+        background-color: #FFF;
+      }
+    }
+  }
+}
