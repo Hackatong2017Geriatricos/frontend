@@ -8,7 +8,7 @@ const Cabecera = (props) => {
   return (
     <div className="Cabecera">
       <div className="contenido">
-        <div className="logo">Vejez Activa</div>
+        <Link to="/"><div className="logo">Vejez Activa</div></Link>
 
         <nav>
           <Link

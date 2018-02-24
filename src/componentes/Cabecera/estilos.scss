@@ -1,17 +1,56 @@
+$alto: 65px;
+
 .Cabecera {
   background-color: #FD7E2B;
-  height: 65px;
+  height: $alto;
 
-  nav {
-    a {
-      border-radius: 3px 3px 0 0;
-      padding: 0 10px;
-      line-height: 30px;
-      background-color: transparent;
+  .contenido {
+    width: 1110px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
 
-      &.activo,
-      &:hover {
-        background-color: #FFF;
+    .logo {
+      font-size: 26px;
+      font-family: Montserrat, sans-serif;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #FFF;
+      letter-spacing: 1px;
+      line-height: $alto;
+      float: left;
+      text-align: center;
+      padding: 0 24px;
+      border: {
+        left: 2px solid #FFF;
+        right: 2px solid #FFF;
+      }
+    }
+
+    nav {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+
+      a {
+        display: inline-block;
+        border-radius: 3px 3px 0 0;
+        padding: 0 10px;
+        line-height: 40px;
+        background-color: transparent;
+        color: #FFF;
+        font-family: Montserrat, sans-serif;
+        font-weight: bold;
+        font-size: 17px;
+
+        &:hover {
+          background-color: #CE6724;
+        }
+
+        &.activo {
+          background-color: #FFF;
+          color: #FD7E2B;
+        }
       }
     }
   }

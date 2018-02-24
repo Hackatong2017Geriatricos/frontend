@@ -1,3 +1,8 @@
+// Montserrat
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+// PT Serif
+@import url('https://fonts.googleapis.com/css?family=PT+Serif:400,700');
+
 * {
   box-sizing: border-box;
   outline: none;
@@ -5,4 +10,20 @@
 
 body {
   margin: 0;
+  font-family: 'PT Serif', serif;
+  font-size: 17px;
+  line-height: 28px;
+  color: #545252;
+}
+
+a, a:active, a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 29px;
+  font-family: Montserrat, sans-serif;
 }
