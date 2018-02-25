@@ -14,6 +14,7 @@ body {
   font-size: 17px;
   line-height: 28px;
   color: #545252;
+  background-color: #EDEDED;
 }
 
 a, a:active, a:visited {
@@ -21,9 +22,20 @@ a, a:active, a:visited {
   color: inherit;
 }
 
+h1, h2, h3 {
+  margin: 0;
+}
+
 h1 {
   font-size: 24px;
   font-weight: bold;
   line-height: 29px;
   font-family: Montserrat, sans-serif;
+  margin-bottom: 10px;
+}
+
+.contenido {
+  width: 920px;
+  margin: 0 auto;
+  overflow: auto;
 }
