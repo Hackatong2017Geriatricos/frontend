@@ -1,5 +1,5 @@
 // Montserrat
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700');
 // PT Serif
 @import url('https://fonts.googleapis.com/css?family=PT+Serif:400,700');
 
@@ -38,4 +38,17 @@ h1 {
   width: 920px;
   margin: 0 auto;
   overflow: auto;
+}
+
+button,
+a.boton, a.boton:hover, a.boton:active, a.boton:visited {
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  font-size: 17px;
+  display: inline-block;
+  line-height: 40px;
+  padding: 0 15px;
+  border-radius: 3px;
+  background-color: #FD7E2B;
+  color: #FFF;
 }
