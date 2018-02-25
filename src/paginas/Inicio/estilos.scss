@@ -20,4 +20,24 @@
       font-weight: bold;
     }
   }
+
+  .contenido {
+    padding: 70px 90px;
+    background-color: #FFF;
+  }
+
+  .links {
+    background-color: #FD7E2B;
+    padding: 70px 90px;
+    color: #FFF;
+
+    .columnas {
+      overflow: hidden;
+
+      .columna {
+        float: left;
+        width: 25%;
+      }
+    }
+  }
 }
