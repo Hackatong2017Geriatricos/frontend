@@ -1,3 +1,15 @@
 .Buscador {
+  overflow: hidden;
 
+  .izquierda {
+    float: left;
+    width: 20%;
+    background-color: #F7F7F7;
+  }
+
+  .derecha {
+    float: left;
+    width: 80%;
+    background-color: #FFF;
+  }
 }
