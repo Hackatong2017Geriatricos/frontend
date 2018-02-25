@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import GoogleMap from 'google-map-react';
+import IconoDeMapa from 'componentes/IconoDeMapa';
 import acciones from 'acciones';
-import Mapa from 'contenedores/Mapa';
+import config from 'config';
 import './estilos.css';
 
 class Buscador extends Component {
   state = {
+    center: { lat: -31.41, lng: -64.18 },
+    zoom: 12,
     geriatricos: [],
     /**
      * @example
@@ -40,6 +44,18 @@ class Buscador extends Component {
     });
   }
 
+  onChildClick = (id) => {
+    console.log(id);
+  }
+
+  onChildMouseEnter = (id) => {
+    console.log(id);
+  }
+
+  onChildMouseLeave = (id) => {
+    console.log(id);
+  }
+
   render() {
     return (
       <div className="Buscador">
@@ -47,13 +63,36 @@ class Buscador extends Component {
           <input
             type="text"
             placeholder="Buscar por nombre"
-            // value={this.state.nombre}
             onChange={this.onChangeNombre} />
           <i className="fas fa-search"></i>
         </div>
 
         <div className="derecha">
-          <Mapa puntos={this.state.puntosEnMapa} />
+          <GoogleMap
+            defaultCenter={this.state.center}
+            defaultZoom={this.state.zoom}
+            onChildClick={this.onChildClick}
+            onChildMouseEnter={this.onChildMouseEnter}
+            onChildMouseLeave={this.onChildMouseLeave}
+            bootstrapURLKeys={{
+              key: config.googleMaps.apiKey,
+              // TODO: Eliminar esto en un futuro y probar hacer zoom en el mapa.
+              // Actualmente, tengo que forzar el uso de `3.30` porque al hacer
+              // zoom en el mapa, los Markers (puntos del mapa) se re-dibujan
+              // mediante una animacion desde las esquinas del mapa.
+              // Parece ser un bug de la nueva version de Google Maps.
+              // Mas info: https://github.com/istarkov/google-map-react/issues/510
+              v: '3.30'
+            }}>
+            {
+              this.state.puntosEnMapa.map((punto, index) =>
+                <IconoDeMapa
+                  key={index}
+                  lat={punto.lat}
+                  lng={punto.lng} />
+              )
+            }
+          </GoogleMap>
         </div>
       </div>
     );
