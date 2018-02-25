@@ -13,18 +13,30 @@ class Buscador extends Component {
      * @type {Array}
      */
     puntosEnMapa: [
-      { lat: -31.41, lng: -64.18 }
+      { lat: -31.42, lng: -64.18 }
     ]
   };
+
+  geriatricos = [];
 
   constructor(props) {
     super(props);
 
     acciones.geriatricos.obtenerTodos().then((geriatricos) => {
-      this.setState({
-        geriatricos,
-        puntosEnMapa: geriatricos.map((x) => ({ lat: x.latitud, lng: x.longitud }))
-      });
+      this.geriatricos = geriatricos;
+      this.filtrarPuntosEnMapa('');
+    });
+  }
+
+  onChangeNombre = ($evento) => {
+    this.filtrarPuntosEnMapa($evento.target.value);
+  };
+
+  filtrarPuntosEnMapa = (nombre) => {
+    this.setState({
+      puntosEnMapa: this.geriatricos
+        .filter((item) => item.nombre.toLowerCase().indexOf(nombre.trim().toLowerCase()) !== -1)
+        .map((x) => ({ lat: x.latitud, lng: x.longitud }))
     });
   }
 
@@ -32,7 +44,11 @@ class Buscador extends Component {
     return (
       <div className="Buscador">
         <div className="izquierda">
-          <input type="text" placeholder="Buscar por nombre" />
+          <input
+            type="text"
+            placeholder="Buscar por nombre"
+            // value={this.state.nombre}
+            onChange={this.onChangeNombre} />
           <i className="fas fa-search"></i>
         </div>
 
