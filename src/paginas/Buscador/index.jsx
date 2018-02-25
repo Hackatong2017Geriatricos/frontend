@@ -8,10 +8,11 @@ class Buscador extends Component {
       <div className="Buscador">
         <div className="izquierda">
           <input type="text" placeholder="Buscar por nombre" />
+          <i className="fas fa-search"></i>
         </div>
 
         <div className="derecha">
-          <Mapa></Mapa>
+          <Mapa />
         </div>
       </div>
     );

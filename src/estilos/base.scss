@@ -2,6 +2,8 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700');
 // PT Serif
 @import url('https://fonts.googleapis.com/css?family=PT+Serif:400,700');
+// FontAesome
+@import 'https://use.fontawesome.com/releases/v5.0.6/css/all.css';
 
 * {
   box-sizing: border-box;
@@ -51,4 +53,12 @@ a.boton, a.boton:hover, a.boton:active, a.boton:visited {
   border-radius: 3px;
   background-color: #FD7E2B;
   color: #FFF;
+}
+
+input[type=text] {
+  border: 1px solid #BBB;
+  line-height: 38px;
+  background-color: #FFF;
+  font-size: 14px;
+  font-family: Montserrat, sans-serif;
 }
