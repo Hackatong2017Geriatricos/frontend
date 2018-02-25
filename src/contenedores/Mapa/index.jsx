@@ -8,23 +8,18 @@ class Mapa extends Component {
   state = {
     center: { lat: -31.41, lng: -64.18 },
     zoom: 12,
-    /**
-     * @example
-     * { lat: 59.955413, lng: 30.337844 }
-     * Mas informacion: https://github.com/istarkov/google-map-react
-     * @type {Array}
-     */
-    puntosEnMapa: [
-      { lat: -31.41, lng: -64.18 }
-    ]
-  }
+  };
 
   render() {
+    // TODO: Esto deberia ser "defaultProps" (al igual que this.props.puntos)
+    const center = this.props.center || this.state.center;
+    const zoom = this.props.zoom || this.state.zoom;
+
     return (
       <div className="Mapa">
         <GoogleMap
-          defaultCenter={this.state.center}
-          defaultZoom={this.state.zoom}
+          defaultCenter={center}
+          defaultZoom={zoom}
           bootstrapURLKeys={{
             key: config.googleMaps.apiKey,
             // TODO: Eliminar esto en un futuro y probar hacer zoom en el mapa.
@@ -36,7 +31,7 @@ class Mapa extends Component {
             v: '3.30'
           }}>
           {
-            this.state.puntosEnMapa.map((punto, index) =>
+            (this.props.puntos || []).map((punto, index) =>
               <IconoDeMapa
                 key={index} {...punto} />)
           }

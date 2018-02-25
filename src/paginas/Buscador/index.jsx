@@ -3,6 +3,18 @@ import Mapa from 'contenedores/Mapa';
 import './estilos.css';
 
 class Buscador extends Component {
+  state = {
+    /**
+     * @example
+     * { lat: 59.955413, lng: 30.337844 }
+     * Mas informacion: https://github.com/istarkov/google-map-react
+     * @type {Array}
+     */
+    puntosEnMapa: [
+      { lat: -31.41, lng: -64.18 }
+    ]
+  };
+
   render() {
     return (
       <div className="Buscador">
@@ -12,7 +24,7 @@ class Buscador extends Component {
         </div>
 
         <div className="derecha">
-          <Mapa />
+          <Mapa puntos={this.state.puntosEnMapa} />
         </div>
       </div>
     );
