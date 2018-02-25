@@ -1,5 +1,8 @@
+$altoDeCabera: 65px;
+
 .Buscador {
   overflow: hidden;
+  height: calc(100vh - #{$altoDeCabera});
 
   .izquierda {
     float: left;
