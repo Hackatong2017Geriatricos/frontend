@@ -6,19 +6,27 @@ import config from 'config';
 import './estilos.css';
 
 class Buscador extends Component {
+  geriatricos = [];
+
   state = {
+    nombre: '',
+    mostrarSoloHabilitados: false,
     center: { lat: -31.41, lng: -64.18 },
     zoom: 12,
-    geriatricos: [],
+
     /**
      * @example
      * { lat: 59.955413, lng: 30.337844 }
      * Mas informacion: https://github.com/istarkov/google-map-react
      * @type {Array}
      */
-    puntosEnMapa: [
-      { lat: -31.42, lng: -64.18 }
-    ]
+    puntosEnMapa: [],
+
+    /**
+     * Tarjetas son las tarjetas que se ven en el menu izquierdo, debajo del buscador.
+     * @type {Array}
+     */
+    tarjetas: []
   };
 
   geriatricos = [];
@@ -28,19 +36,29 @@ class Buscador extends Component {
 
     acciones.geriatricos.obtenerTodos().then((geriatricos) => {
       this.geriatricos = geriatricos;
-      this.filtrarPuntosEnMapa('');
+      this.filtrarPuntosEnMapa();
     });
   }
 
   onChangeNombre = ($evento) => {
-    this.filtrarPuntosEnMapa($evento.target.value);
+    this.setState({ nombre: $evento.target.value }, this.filtrarPuntosEnMapa);
   };
 
-  filtrarPuntosEnMapa = (nombre) => {
+  filtrarPuntosEnMapa = () => {
+    const { nombre, mostrarSoloHabilitados } = this.state;
+    let puntos = this.geriatricos;
+
+    if (nombre) {
+      puntos = puntos.filter((item) => item.nombre.toLowerCase().indexOf(nombre.trim().toLowerCase()) !== -1);
+    }
+
+    if (mostrarSoloHabilitados) {
+      puntos = puntos.filter((item) => item.estado_habilitacion.toLowerCase() === 'habilitado')
+    }
+
     this.setState({
-      puntosEnMapa: this.geriatricos
-        .filter((item) => item.nombre.toLowerCase().indexOf(nombre.trim().toLowerCase()) !== -1)
-        .map((x) => ({ lat: x.latitud, lng: x.longitud }))
+      puntosEnMapa: puntos.map((x) => ({ lat: x.latitud, lng: x.longitud })),
+      tarjetas: puntos
     });
   }
 
@@ -48,26 +66,87 @@ class Buscador extends Component {
     console.log(id);
   }
 
-  onChildMouseEnter = (id) => {
-    console.log(id);
+  onChildMouseEnter = (id, a, b, c) => {
+    console.log(id, a, b, c);
   }
 
   onChildMouseLeave = (id) => {
     console.log(id);
   }
 
+  onClickFiltrarHabilitados = () => {
+    this.setState({
+      mostrarSoloHabilitados: !this.state.mostrarSoloHabilitados
+    }, this.filtrarPuntosEnMapa);
+  }
+
   render() {
     return (
       <div className="Buscador">
         <div className="izquierda">
-          <input
-            type="text"
-            placeholder="Buscar por nombre"
-            onChange={this.onChangeNombre} />
-          <i className="fas fa-search"></i>
+          <div className="buscador">
+            <input
+              type="text"
+              placeholder="Buscar por nombre"
+              value={this.state.nombre}
+              onChange={this.onChangeNombre} />
+              <i className="fas fa-search"></i>
+          </div>
+
+          <div className="tarjetas">
+            {
+              this.state.tarjetas.map((geriatrico, index) =>
+                <div className="tarjeta" key={index}>
+                  <div className="nombre">{geriatrico.nombre}</div>
+
+                  <div className="estado">
+                    {geriatrico.estado_habilitacion} <i className="fas fa-question-circle"></i>
+                  </div>
+
+                  {
+                    geriatrico.direccion &&
+                      <div className="direccion">
+                        <i className="fas fa-map-marker-alt"></i>
+                        {geriatrico.direccion}
+                      </div>
+                  }
+
+                  {
+                    geriatrico.telefono &&
+                      <div className="telefono">
+                        <i className="fas fa-phone"></i>
+                        {geriatrico.telefono}
+                      </div>
+                  }
+
+                  {
+                    geriatrico.email &&
+                      <div className="email">
+                        <i className="fas fa-envelope"></i>
+                        <a href={`mailto:${geriatrico.email}`}>
+                          {geriatrico.email}
+                        </a>
+                      </div>
+                  }
+
+                  {
+                    geriatrico.web &&
+                      <div className="web">
+                        <i className="fas fa-hand-pointer"></i>
+                        {geriatrico.web}
+                      </div>
+                  }
+                </div>
+              )
+            }
+          </div>
         </div>
 
         <div className="derecha">
+          <div className="filtroSoloHabilitados" onClick={this.onClickFiltrarHabilitados}>
+            <input type="checkbox" checked={this.state.mostrarSoloHabilitados} /> Mostrar sólo geriátricos habilitados
+          </div>
+
           <GoogleMap
             defaultCenter={this.state.center}
             defaultZoom={this.state.zoom}

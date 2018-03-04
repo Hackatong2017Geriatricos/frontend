@@ -7,29 +7,90 @@ $altoDeCabera: 65px;
   .izquierda {
     position: relative;
     float: left;
-    width: 20%;
+    width: 25%;
     height: 100%;
     background-color: #F7F7F7;
 
-    input[type=text] {
-      margin: 20px;
-      width: calc(100% - 40px);
-      padding: 0 30px 0 15px;
+    .buscador {
+      input[type=text] {
+        margin: 20px;
+        width: calc(100% - 40px);
+        padding: 0 30px 0 15px;
+      }
+
+      i {
+        position: absolute;
+        right: 30px;
+        top: 32px;
+        font-size: 16px;
+      }
     }
 
-    .fas {
+    .tarjetas {
       position: absolute;
-      right: 30px;
-      top: 32px;
-      font-size: 16px;
+      top: 70px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow: scroll;
+
+      .tarjeta {
+        font-family: Montserrat, sans-serif;
+        width: 94%;
+        margin: 10px 3%;
+        background-color: #FFF;
+        font-size: 12px;
+        color: #4A4A4A;
+        padding: 15px;
+        line-height: 23px;
+
+        .nombre {
+          font-size: 14px;
+        }
+
+        .estado {
+          text-transform: uppercase;
+
+          i {
+            cursor: pointer;
+          }
+        }
+
+        i {
+          margin-right: 5px;
+        }
+
+        a {
+          color: #4A90E2;
+        }
+      }
     }
   }
 
   .derecha {
     position: relative;
     float: left;
-    width: 80%;
+    width: 75%;
     height: 100%;
     background-color: #FFF;
+
+    .filtroSoloHabilitados {
+      position: absolute;
+      left: 15px;
+      top: 15px;
+      border: 1px solid #BBB;
+      line-height: 42px;
+      z-index: 2;
+      background-color: #FFF;
+      font-family: Montserrat, sans-serif;
+      padding: 0 12px;
+      font-size: 14px;
+      cursor: pointer;
+
+      input {
+        position: relative;
+        top: -1px;
+      }
+    }
   }
 }
