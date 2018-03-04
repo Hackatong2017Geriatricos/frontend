@@ -24,11 +24,17 @@
   .contenido {
     padding: 70px 90px;
     background-color: #FFF;
+
+    img {
+      width: 100%;
+      margin: 20px 0 30px;
+    }
   }
 
   .links {
+    font-size: 14px;
     background-color: #FD7E2B;
-    padding: 70px 90px;
+    padding: 50px;
     color: #FFF;
 
     .columnas {
@@ -36,7 +42,7 @@
 
       .columna {
         float: left;
-        width: 25%;
+        width: 50%;
       }
     }
   }

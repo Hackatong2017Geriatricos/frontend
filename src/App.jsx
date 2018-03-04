@@ -18,7 +18,7 @@ class App extends Component {
 
             <Switch>
               <Route path='/buscador-de-geriatricos' component={ Buscador } />
-              <Route path='/derechos-de-los-mayores' component={ Derechos } />
+              <Route path='/derechos-de-las-personas-mayores' component={ Derechos } />
               <Route path='/' component={ Inicio } />
             </Switch>
 

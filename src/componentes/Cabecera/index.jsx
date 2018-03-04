@@ -20,8 +20,8 @@ const Cabecera = (props) => {
             to="/buscador-de-geriatricos">Buscador de geriátricos</Link>
 
           <Link
-            className={ paginaActual === 'derechos-de-los-mayores' ? 'activo' : '' }
-            to="derechos-de-los-mayores">Derechos de los mayores</Link>
+            className={ paginaActual === 'derechos-de-las-personas-mayores' ? 'activo' : '' }
+            to="derechos-de-las-personas-mayores">Derecho de las personas mayores</Link>
         </nav>
       </div>
     </div>
