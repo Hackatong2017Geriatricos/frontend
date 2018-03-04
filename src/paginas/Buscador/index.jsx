@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMap from 'google-map-react';
 import IconoDeMapa from 'componentes/IconoDeMapa';
+import Tarjeta from 'componentes/Tarjeta';
 import acciones from 'acciones';
 import config from 'config';
 import './estilos.css';
@@ -63,15 +64,15 @@ class Buscador extends Component {
   }
 
   onChildClick = (id) => {
-    console.log(id);
+    // console.log(id);
   }
 
   onChildMouseEnter = (id, a, b, c) => {
-    console.log(id, a, b, c);
+    // console.log(id, a, b, c);
   }
 
   onChildMouseLeave = (id) => {
-    console.log(id);
+    // console.log(id);
   }
 
   onClickFiltrarHabilitados = () => {
@@ -80,7 +81,19 @@ class Buscador extends Component {
     }, this.filtrarPuntosEnMapa);
   }
 
+  _onClickTarjeta = (geriatrico) => {
+    this.setState({
+      center: {
+        lat: geriatrico.latitud,
+        lng: geriatrico.longitud
+      },
+      zoom: 15
+    });
+  }
+
   render() {
+    const { tarjetas } = this.state;
+
     return (
       <div className="Buscador">
         <div className="izquierda">
@@ -95,50 +108,8 @@ class Buscador extends Component {
 
           <div className="tarjetas">
             {
-              this.state.tarjetas.map((geriatrico, index) =>
-                <div className="tarjeta" key={index}>
-                  <div className="nombre">{geriatrico.nombre}</div>
-
-                  <div className={`estado ` + (geriatrico.estado_habilitacion === 'Habilitado' ? 'habilitado' : '')}>
-                    {geriatrico.estado_habilitacion.replace(/\_/g, ' ')} <i className="fas fa-question-circle"></i>
-                  </div>
-
-                  {
-                    geriatrico.direccion &&
-                      <div className="direccion">
-                        <i className="fas fa-map-marker-alt"></i>
-                        {geriatrico.direccion}
-                      </div>
-                  }
-
-                  {
-                    geriatrico.telefono &&
-                      <div className="telefono">
-                        <i className="fas fa-phone"></i>
-                        {geriatrico.telefono}
-                      </div>
-                  }
-
-                  {
-                    geriatrico.email &&
-                      <div className="email">
-                        <i className="fas fa-envelope"></i>
-                        <a href={`mailto:${geriatrico.email}`}>
-                          {geriatrico.email}
-                        </a>
-                      </div>
-                  }
-
-                  {
-                    geriatrico.url &&
-                      <div className="web">
-                        <i className="fas fa-hand-pointer"></i>
-                        <a href={geriatrico.url}>
-                          {geriatrico.url}
-                        </a>
-                      </div>
-                  }
-                </div>
+              tarjetas.length <= 10 && tarjetas.map((geriatrico, index) =>
+                <Tarjeta key={index} geriatrico={geriatrico} onClick={this._onClickTarjeta} />
               )
             }
           </div>
@@ -150,8 +121,8 @@ class Buscador extends Component {
           </div>
 
           <GoogleMap
-            defaultCenter={this.state.center}
-            defaultZoom={this.state.zoom}
+            center={this.state.center}
+            zoom={this.state.zoom}
             onChildClick={this.onChildClick}
             onChildMouseEnter={this.onChildMouseEnter}
             onChildMouseLeave={this.onChildMouseLeave}

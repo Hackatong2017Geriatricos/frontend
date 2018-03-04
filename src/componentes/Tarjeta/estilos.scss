@@ -1,0 +1,36 @@
+.Tarjeta {
+  font-family: Montserrat, sans-serif;
+  width: 94%;
+  margin: 10px 3%;
+  background-color: #FFF;
+  font-size: 12px;
+  color: #4A4A4A;
+  padding: 15px;
+  line-height: 23px;
+
+  .nombre {
+    font-size: 14px;
+  }
+
+  .estado {
+    text-transform: uppercase;
+
+    &.habilitado {
+      color: #6BB020;
+    }
+
+    i {
+      cursor: pointer;
+      color: #545252;
+    }
+  }
+
+  i {
+    margin-right: 5px;
+  }
+
+  a {
+    color: #4A90E2;
+    text-decoration: underline;
+  }
+}
