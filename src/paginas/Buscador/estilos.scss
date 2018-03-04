@@ -51,8 +51,13 @@ $altoDeCabera: 65px;
         .estado {
           text-transform: uppercase;
 
+          &.habilitado {
+            color: #6BB020;
+          }
+
           i {
             cursor: pointer;
+            color: #545252;
           }
         }
 
@@ -62,6 +67,7 @@ $altoDeCabera: 65px;
 
         a {
           color: #4A90E2;
+          text-decoration: underline;
         }
       }
     }

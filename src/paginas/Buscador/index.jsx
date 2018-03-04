@@ -99,8 +99,8 @@ class Buscador extends Component {
                 <div className="tarjeta" key={index}>
                   <div className="nombre">{geriatrico.nombre}</div>
 
-                  <div className="estado">
-                    {geriatrico.estado_habilitacion} <i className="fas fa-question-circle"></i>
+                  <div className={`estado ` + (geriatrico.estado_habilitacion === 'Habilitado' ? 'habilitado' : '')}>
+                    {geriatrico.estado_habilitacion.replace(/\_/g, ' ')} <i className="fas fa-question-circle"></i>
                   </div>
 
                   {
@@ -130,10 +130,12 @@ class Buscador extends Component {
                   }
 
                   {
-                    geriatrico.web &&
+                    geriatrico.url &&
                       <div className="web">
                         <i className="fas fa-hand-pointer"></i>
-                        {geriatrico.web}
+                        <a href={geriatrico.url}>
+                          {geriatrico.url}
+                        </a>
                       </div>
                   }
                 </div>
