@@ -161,7 +161,7 @@ class Buscador extends Component {
               // mediante una animacion desde las esquinas del mapa.
               // Parece ser un bug de la nueva version de Google Maps.
               // Mas info: https://github.com/istarkov/google-map-react/issues/510
-              v: '3.30'
+              v: '3.31'
             }}>
             {
               this.state.puntosEnMapa.map((punto, index) =>
