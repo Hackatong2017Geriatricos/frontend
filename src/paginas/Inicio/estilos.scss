@@ -6,11 +6,11 @@
     height: 430px;
     background-image: url(./imagenGrande.jpg);
     background-size: cover;
-    background-position: center;
+    background-position: center left;
 
     .lema {
       position: absolute;
-      left: 50%;
+      right: 30px;
       top: 35%;
       color: #545252;
       width: 540px;
