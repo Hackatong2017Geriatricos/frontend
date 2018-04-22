@@ -2,6 +2,10 @@ import React from 'react';
 import icon from './icono.png';
 import './estilos.css';
 
-const IconoDeMapa = () => <img className="IconoDeMapa" src={icon} alt="icon" />;
+const IconoDeMapa = (props) =>
+  <img
+    className={`IconoDeMapa ` + (props.hover ? 'hover' : '')}
+    src={icon}
+    alt="Geriatrico" />;
 
 export default IconoDeMapa;

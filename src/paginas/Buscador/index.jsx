@@ -62,21 +62,28 @@ class Buscador extends Component {
         geriatrico: x,
         lat: x.latitud,
         lng: x.longitud,
+        hover: false,
         getPosition: () => new this.maps.LatLng({ lat: x.latitud, lng: x.longitud })
       }))
     }, this.filtrarTarjetas);
   }
 
-  onChildClick = (id) => {
-    // console.log(id);
+  onChildClick = (i) => {
+    // console.log(i);
   }
 
-  onChildMouseEnter = (id, a, b, c) => {
-    // console.log(id, a, b, c);
+  onChildMouseEnter = (i) => {
+    let puntosEnMapa = [...this.state.puntosEnMapa];
+    puntosEnMapa[i].hover = true;
+
+    this.setState({ puntosEnMapa });
   }
 
-  onChildMouseLeave = (id) => {
-    // console.log(id);
+  onChildMouseLeave = (i) => {
+    let puntosEnMapa = [...this.state.puntosEnMapa];
+    puntosEnMapa[i].hover = false;
+
+    this.setState({ puntosEnMapa });
   }
 
   onClickFiltrarHabilitados = () => {
@@ -116,6 +123,8 @@ class Buscador extends Component {
       tarjetas.sort((a, b) => a.nombre.trim().toLowerCase() > b.nombre.trim().toLowerCase());
 
       this.setState({ tarjetas });
+    } else {
+      this.setState({ tarjetas: [] });
     }
   }
 
@@ -144,6 +153,12 @@ class Buscador extends Component {
 
           <div className="tarjetas">
             {
+              // TODO: Implementar los textos aca. Si no hay tarjetas, avisarle
+              // que haga zoom o que busque algo.
+
+              // TODO: Hacer que al hacer HOVER aca, se setee "hover" en true
+              // en el objeto "puntosEnMapa", y tambien setearle borde
+              // naranja a esta tarjeta.
               this.state.tarjetas.map((geriatrico, index) =>
                 <Tarjeta key={index} geriatrico={geriatrico} onClick={this._onClickTarjeta} />
               )
@@ -170,6 +185,7 @@ class Buscador extends Component {
               this.state.puntosEnMapa.map((punto, index) =>
                 <IconoDeMapa
                   key={index}
+                  hover={punto.hover}
                   lat={punto.lat}
                   lng={punto.lng} />
               )

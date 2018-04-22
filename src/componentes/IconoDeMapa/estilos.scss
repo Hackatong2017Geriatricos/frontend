@@ -1,11 +1,23 @@
 .IconoDeMapa {
+  $alto: 44px;
+  $ancho: 25px;
+
   user-select: none;
   position: relative;
 
   // Hay que cambiar estos valores si cambias la imagen
-  height: 44px;
-  width: 25px;
-  top: -44px;
-  left: calc(-25px / 2);
+  height: $alto;
+  width: $ancho;
+  left: calc(#{$ancho} / -2);
+  top: $alto * -1;
   cursor: pointer;
+  transition: all 0.05s;
+
+  &:hover,
+  &.hover {
+    height: $alto * 1.1;
+    width: $ancho * 1.1;
+    left: calc(#{$ancho * 1.1} / -2);
+    top: $alto * -1.1;
+  }
 }
