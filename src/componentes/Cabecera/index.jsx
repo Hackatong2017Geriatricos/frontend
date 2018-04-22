@@ -21,7 +21,7 @@ const Cabecera = (props) => {
 
           <Link
             className={ paginaActual === 'derechos-de-las-personas-mayores' ? 'activo' : '' }
-            to="derechos-de-las-personas-mayores">Derecho de las personas mayores</Link>
+            to="derechos-de-las-personas-mayores">Derechos de las personas mayores</Link>
         </nav>
       </div>
     </div>
