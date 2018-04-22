@@ -8,6 +8,8 @@ import './estilos.css';
 
 class Buscador extends Component {
   geriatricos = [];
+  map = null;
+  maps = null;
 
   state = {
     nombre: '',
@@ -30,13 +32,11 @@ class Buscador extends Component {
     tarjetas: []
   };
 
-  geriatricos = [];
-
   constructor(props) {
     super(props);
 
     acciones.geriatricos.obtenerTodos().then((geriatricos) => {
-      this.geriatricos = geriatricos;
+      this.geriatricos = geriatricos.filter(x => x.latitud !== 0);
       this.filtrarPuntosEnMapa();
     });
   }
@@ -58,9 +58,13 @@ class Buscador extends Component {
     }
 
     this.setState({
-      puntosEnMapa: puntos.map((x) => ({ lat: x.latitud, lng: x.longitud })),
-      tarjetas: puntos
-    });
+      puntosEnMapa: puntos.map((x) => ({
+        geriatrico: x,
+        lat: x.latitud,
+        lng: x.longitud,
+        getPosition: () => new this.maps.LatLng({ lat: x.latitud, lng: x.longitud })
+      }))
+    }, this.filtrarTarjetas);
   }
 
   onChildClick = (id) => {
@@ -87,13 +91,45 @@ class Buscador extends Component {
         lat: geriatrico.latitud,
         lng: geriatrico.longitud
       },
-      zoom: 15
+      zoom: 14
     });
   }
 
-  render() {
-    const { tarjetas } = this.state;
+  obtenerPuntosVisibles = () => {
+    if (!this.map) {
+      return [];
+    }
 
+    return this.state.puntosEnMapa.filter((punto) =>
+      this.map.getBounds().contains(punto.getPosition())
+    );
+  }
+
+  /**
+   * @description Si en el mapa hay menos de 20 puntos visibles, mostrarlos
+   */
+  filtrarTarjetas = () => {
+    const puntosVisibles = this.obtenerPuntosVisibles();
+
+    if (puntosVisibles.length < 20) {
+      const tarjetas = puntosVisibles.map(punto => punto.geriatrico);
+      tarjetas.sort((a, b) => a.nombre.trim().toLowerCase() > b.nombre.trim().toLowerCase());
+
+      this.setState({ tarjetas });
+    }
+  }
+
+  _onMapaInicializado = ({ map, maps }) => {
+    this.map = map;
+    this.maps = maps;
+    this.filtrarTarjetas();
+  }
+
+  _onCambioEnMapa = (data) => {
+    this.setState({ zoom: data.zoom }, this.filtrarTarjetas);
+  }
+
+  render() {
     return (
       <div className="Buscador">
         <div className="izquierda">
@@ -108,7 +144,7 @@ class Buscador extends Component {
 
           <div className="tarjetas">
             {
-              tarjetas.length <= 10 && tarjetas.map((geriatrico, index) =>
+              this.state.tarjetas.map((geriatrico, index) =>
                 <Tarjeta key={index} geriatrico={geriatrico} onClick={this._onClickTarjeta} />
               )
             }
@@ -126,16 +162,10 @@ class Buscador extends Component {
             onChildClick={this.onChildClick}
             onChildMouseEnter={this.onChildMouseEnter}
             onChildMouseLeave={this.onChildMouseLeave}
-            bootstrapURLKeys={{
-              key: config.googleMaps.apiKey,
-              // TODO: Eliminar esto en un futuro y probar hacer zoom en el mapa.
-              // Actualmente, tengo que forzar el uso de `3.30` porque al hacer
-              // zoom en el mapa, los Markers (puntos del mapa) se re-dibujan
-              // mediante una animacion desde las esquinas del mapa.
-              // Parece ser un bug de la nueva version de Google Maps.
-              // Mas info: https://github.com/istarkov/google-map-react/issues/510
-              v: '3.31'
-            }}>
+            bootstrapURLKeys={{ key: config.googleMaps.apiKey }}
+            onChange={this._onCambioEnMapa}
+            onGoogleApiLoaded={this._onMapaInicializado}
+            yesIWantToUseGoogleMapApiInternals>
             {
               this.state.puntosEnMapa.map((punto, index) =>
                 <IconoDeMapa
