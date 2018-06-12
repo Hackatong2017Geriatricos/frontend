@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import GoogleMap from 'google-map-react';
+import Cookies from 'js-cookie';
 import IconoDeMapa from 'componentes/IconoDeMapa';
 import Tarjeta from 'componentes/Tarjeta';
 import acciones from 'acciones';
 import config from 'config';
+import gif from './vejez-activa.gif';
 import './estilos.css';
 
 class Buscador extends Component {
@@ -16,6 +18,7 @@ class Buscador extends Component {
     mostrarSoloHabilitados: false,
     center: { lat: -31.41, lng: -64.18 },
     zoom: 12,
+    showModal: !Cookies.get('mostrarModalEnBuscador'),
 
     /**
      * @example
@@ -138,9 +141,24 @@ class Buscador extends Component {
     this.setState({ zoom: data.zoom }, this.filtrarTarjetas);
   }
 
+  _cerrarModal = () => {
+    this.setState({ showModal: false });
+    Cookies.set('mostrarModalEnBuscador', false);
+  }
+
   render() {
     return (
       <div className="Buscador">
+        {
+          this.state.showModal &&
+            <div className="modal">
+              <div
+                className="fas fa-window-close icono-cerrar"
+                onClick={this._cerrarModal}></div>
+
+              <img src={gif} alt="Vejez Activa"/>
+            </div>
+        }
         <div className="izquierda">
           <div className="buscador">
             <input

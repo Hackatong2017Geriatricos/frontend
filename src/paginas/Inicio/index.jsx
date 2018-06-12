@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import gif from './vejez-activa.gif';
 import './estilos.css';
 
 class Inicio extends Component {
@@ -17,10 +16,6 @@ class Inicio extends Component {
           <div className="texto">
             Es una iniciativa que surge de la necesidad de promover el cumplimiento los derechos humanos de las personas mayores. Argentina, junto con otros Estados de la región, ha firmado la Convención Interamericana sobre la Protección de los Derechos Humanos de las Personas Mayores, que los obliga a adoptar medidas para garantizar los derechos de las personas mayores de 60 años.
           </div>
-
-          <br/>
-
-          <img src={gif} alt="Vejez Activa"/>
 
           <br/>
 
