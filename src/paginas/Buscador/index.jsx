@@ -44,8 +44,8 @@ class Buscador extends Component {
     });
   }
 
-  onChangeNombre = ($evento) => {
-    this.setState({ nombre: $evento.target.value }, this.filtrarPuntosEnMapa);
+  onChangeNombre = (evento) => {
+    this.setState({ nombre: evento.target.value }, this.filtrarPuntosEnMapa);
   };
 
   filtrarPuntosEnMapa = () => {
@@ -71,22 +71,28 @@ class Buscador extends Component {
     }, this.filtrarTarjetas);
   }
 
-  onChildClick = (i) => {
-    // console.log(i);
+  onIconoMouseEnter = (item) => {
+    const puntosEnMapa = this.state.puntosEnMapa.map(
+      x => ({ ...x, hover: x.geriatrico.nombre === item.geriatrico.nombre })
+    );
+
+    const tarjetas = this.state.tarjetas.map(
+      x => ({ ...x, activo: x.nombre === item.geriatrico.nombre })
+    );
+
+    this.setState({ puntosEnMapa, tarjetas });
   }
 
-  onChildMouseEnter = (i) => {
-    let puntosEnMapa = [...this.state.puntosEnMapa];
-    puntosEnMapa[i].hover = true;
+  onIconoMouseLeave = (item) => {
+    const puntosEnMapa = this.state.puntosEnMapa.map(
+      x => ({ ...x, hover: false })
+    );
 
-    this.setState({ puntosEnMapa });
-  }
+    const tarjetas = this.state.tarjetas.map(
+      x => ({ ...x, activo: false })
+    );
 
-  onChildMouseLeave = (i) => {
-    let puntosEnMapa = [...this.state.puntosEnMapa];
-    puntosEnMapa[i].hover = false;
-
-    this.setState({ puntosEnMapa });
+    this.setState({ puntosEnMapa, tarjetas });
   }
 
   onClickFiltrarHabilitados = () => {
@@ -101,7 +107,7 @@ class Buscador extends Component {
         lat: geriatrico.latitud,
         lng: geriatrico.longitud
       },
-      zoom: 14
+      zoom: this.state.zoom
     });
   }
 
@@ -175,26 +181,46 @@ class Buscador extends Component {
               // que haga zoom o que busque algo.
 
               // TODO: Hacer que al hacer HOVER aca, se setee "hover" en true
-              // en el objeto "puntosEnMapa", y tambien setearle borde
-              // naranja a esta tarjeta.
+              // en el objeto "puntosEnMapa".
               this.state.tarjetas.map((geriatrico, index) =>
-                <Tarjeta key={index} geriatrico={geriatrico} onClick={this._onClickTarjeta} />
+                <Tarjeta
+                  key={index}
+                  geriatrico={geriatrico}
+                  activo={!!geriatrico.activo}
+                  onClick={this._onClickTarjeta}
+                  onMouseEnter={() => this.onIconoMouseEnter({geriatrico})}
+                  onMouseLeave={() => this.onIconoMouseLeave({geriatrico})} />
               )
+            }
+
+            {
+              this.state.tarjetas.length === 0 && this.state.nombre === ''
+                ? <div className="explicacion">
+                    Haz zoom en el mapa la zona que te interesa, o utiliza el buscador.<br />
+                    Los resultados se mostrarán aquí.
+                  </div>
+                : ''
+            }
+
+            {
+              this.state.puntosEnMapa.length === 0 && this.state.nombre !== ''
+                ? <div className="explicacion">
+                    En esta zona no encontramos resultados.<br />
+                    Prueba con otro nombre, o cambia de zona.
+                  </div>
+                : ''
             }
           </div>
         </div>
 
         <div className="derecha">
-          <div className="filtroSoloHabilitados" onClick={this.onClickFiltrarHabilitados}>
+          {/* <div className="filtroSoloHabilitados" onClick={this.onClickFiltrarHabilitados}>
             <input type="checkbox" checked={this.state.mostrarSoloHabilitados} /> Mostrar sólo geriátricos habilitados
-          </div>
+          </div> */}
 
           <GoogleMap
             center={this.state.center}
             zoom={this.state.zoom}
-            onChildClick={this.onChildClick}
-            onChildMouseEnter={this.onChildMouseEnter}
-            onChildMouseLeave={this.onChildMouseLeave}
             bootstrapURLKeys={{ key: config.googleMaps.apiKey }}
             onChange={this._onCambioEnMapa}
             onGoogleApiLoaded={this._onMapaInicializado}
@@ -205,7 +231,10 @@ class Buscador extends Component {
                   key={index}
                   hover={punto.hover}
                   lat={punto.lat}
-                  lng={punto.lng} />
+                  lng={punto.lng}
+                  geriatrico={punto.geriatrico}
+                  onMouseEnter={() => this.onIconoMouseEnter(punto)}
+                  onMouseLeave={() => this.onIconoMouseLeave(punto)} />
               )
             }
           </GoogleMap>

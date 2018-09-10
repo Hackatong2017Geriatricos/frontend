@@ -5,8 +5,14 @@
   background-color: #FFF;
   font-size: 12px;
   color: #4A4A4A;
-  padding: 15px;
+  padding: 10px;
   line-height: 23px;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+  border: 2px solid transparent;
+
+  &.--activa {
+    border: 2px solid #FD7E2B;
+  }
 
   .nombre {
     font-size: 14px;
