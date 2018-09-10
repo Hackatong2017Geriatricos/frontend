@@ -17,11 +17,11 @@ const Cabecera = (props) => {
 
           <Link
             className={ paginaActual === 'buscador-de-geriatricos' ? 'activo' : '' }
-            to="/buscador-de-geriatricos">Buscador de geriátricos</Link>
+            to="/buscador-de-geriatricos">Buscador<span className="responsive-oculto"> de geriátricos</span></Link>
 
           <Link
             className={ paginaActual === 'derechos-de-las-personas-mayores' ? 'activo' : '' }
-            to="derechos-de-las-personas-mayores">Derechos de las personas mayores</Link>
+            to="derechos-de-las-personas-mayores">Derechos <span className="responsive-oculto"> de las personas mayores</span></Link>
         </nav>
       </div>
     </div>

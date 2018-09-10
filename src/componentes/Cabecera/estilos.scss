@@ -5,7 +5,7 @@ $alto: 65px;
   height: $alto;
 
   .contenido {
-    width: 1110px;
+    max-width: 1110px;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
@@ -24,6 +24,16 @@ $alto: 65px;
       border: {
         left: 2px solid #FFF;
         right: 2px solid #FFF;
+      }
+
+      @media (max-width: 600px) {
+        font-size: 16px;
+        padding: 0 8px;
+        border: {
+          left: none;
+          right: 1px solid #FFF;
+        }
+        letter-spacing: 0.5px;
       }
     }
 
@@ -44,6 +54,12 @@ $alto: 65px;
         font-weight: bold;
         font-size: 17px;
 
+        @media (max-width: 600px) {
+          padding: 0 6px;
+          font-size: 14px;
+          font-weight: 300;
+        }
+
         &:hover {
           background-color: #CE6724;
         }
@@ -51,6 +67,12 @@ $alto: 65px;
         &.activo {
           background-color: #FFF;
           color: #FD7E2B;
+        }
+
+        .responsive-oculto {
+          @media (max-width: 1000px) {
+            display: none;
+          }
         }
       }
     }
