@@ -3,6 +3,14 @@
     background-color: #FFF;
     padding: 70px 90px;
 
+    @media (max-width: 800px) {
+      padding: 50px;
+    }
+
+    @media (max-width: 500px) {
+      padding: 20px;
+    }
+
     .texto {
       margin-bottom: 40px;
     }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import hero from './hero-final.png';
 import './estilos.css';
 
 class Inicio extends Component {
@@ -6,6 +7,7 @@ class Inicio extends Component {
     return (
       <div className="Inicio">
         <div className="imagenGrande">
+          <img src={hero} alt="Foto de inicio" />
           <div className="lema">
             Una plataforma para visibilizar, promover y cumplir los derechos de las personas mayores
           </div>
